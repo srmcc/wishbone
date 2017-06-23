@@ -24,7 +24,6 @@ with warnings.catch_warnings():
     warnings.simplefilter('ignore')  # catch experimental ipython widget warning
     import seaborn as sns
 
-from tsne import bh_sne
 from scipy.sparse import csr_matrix, find
 from scipy.sparse.linalg import eigs
 from numpy.linalg import norm
@@ -35,6 +34,7 @@ import fcsparser
 import phenograph
 
 from time import time
+from sklearn import manifold
 
 import wishbone
 
@@ -419,7 +419,9 @@ class SCData:
         if data.shape[0] < 100 and perplexity > perplexity_limit:
             print('Reducing perplexity to %d since there are <100 cells in the dataset. ' % perplexity_limit)
             perplexity = perplexity_limit
-        self.tsne = pd.DataFrame(bh_sne(data, perplexity=perplexity),
+        tsne = manifold.TSNE(n_components=2, perplexity= perplexity, random_state=0, n_iter=2000, verbo
+        X_tsne = tsne.fit_transform(data)
+        self.tsne = pd.DataFrame(X_tsne,
                                  index=self.data.index, columns=['x', 'y'])
 
     def plot_tsne(self, fig=None, ax=None, title='tSNE projection'):
