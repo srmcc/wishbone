@@ -136,9 +136,10 @@ class SCData:
         """
         with open(fin, 'rb') as f:
             data = pickle.load(f)
-        scdata = cls(data['_data'], data['_metadata'])
+        scdata = cls(data['_data'], data_type=data['_data_type'], metadata=data['_metadata'])
         del data['_data']
         del data['_metadata']
+        del data['_data_type']
         for k, v in data.items():
             setattr(scdata, k[1:], v)
         return scdata
