@@ -48,6 +48,9 @@ size = 8
 dir_path = os.path.dirname(os.path.realpath(__file__))
 wishbone_path=dir_path[:-13]
 tools_path=wishbone_path +'/tools'
+analysis_path= wishbone_path +'/analysis'
+if not os.path.exists(analysis_path):
+    os.makedirs(analysis_path)
 
 def qualitative_colors(n):
     """ Generalte list of colors
@@ -394,7 +397,7 @@ class SCData:
         plt.ylabel('Variance explained')
         plt.title('Principal components')
         sns.despine(ax=ax)
-        plt.savefig('plot_pca_variance_explained_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_pca_variance_explained_'+ str(time()) +'.pdf')
         return fig, ax
 
 
@@ -441,7 +444,7 @@ class SCData:
         ax.xaxis.set_major_locator(plt.NullLocator())
         ax.yaxis.set_major_locator(plt.NullLocator())
         ax.set_title(title)
-        plt.savefig('plot_tsne_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_tsne_'+ str(time()) +'.pdf')
         return fig, ax
 
 
@@ -468,7 +471,7 @@ class SCData:
         ax.xaxis.set_major_locator(plt.NullLocator())
         ax.yaxis.set_major_locator(plt.NullLocator())
         plt.colorbar()
-        plt.savefig('plot_tsne_by_cell_sizes_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_tsne_by_cell_sizes_'+ str(time()) +'.pdf')
         return fig, ax
  
     def run_phenograph(self, n_pca_components=15, **kwargs):
@@ -518,7 +521,7 @@ class SCData:
         ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), markerscale=3)
         ax.xaxis.set_major_locator(plt.NullLocator())
         ax.yaxis.set_major_locator(plt.NullLocator())
-        plt.savefig('plot_phenograph_clusters_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_phenograph_clusters_'+ str(time()) +'.pdf')
         return fig, ax
 
 
@@ -545,7 +548,7 @@ class SCData:
         sns.heatmap(means)
         plt.ylabel('Phenograph Clusters')
         plt.xlabel('Markers')
-        plt.savefig('summarize_phenograph_clusters_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/summarize_phenograph_clusters_'+ str(time()) +'.pdf')
         return fig, ax
 
 
@@ -684,7 +687,7 @@ class SCData:
             plt.title( 'Component %d' % i, fontsize=10 )
 
         # fig.suptitle(title, fontsize=12)
-        plt.savefig('plot_diffusion_components_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_diffusion_components_'+ str(time()) +'.pdf')
         return fig, ax
 
 
@@ -704,7 +707,7 @@ class SCData:
         plt.title( title )
         plt.xlim([ -0.1, len(self.diffusion_eigenvalues) - 0.9])
         sns.despine(ax=ax)
-        plt.savefig('plot_diffusion_eigen_vectors_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_diffusion_eigen_vectors_'+ str(time()) +'.pdf')
         return fig, ax
 
 
@@ -790,7 +793,7 @@ class SCData:
         ax.set_xlabel('correlation')
         ax.set_ylabel('gene density')
         plt.legend()
-        plt.savefig('plot_gene_component_correlations_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_gene_component_correlations_'+ str(time()) +'.pdf')
         return fig, ax
 
     @staticmethod
@@ -943,7 +946,7 @@ class SCData:
             ax.set_title(g)
             ax.xaxis.set_major_locator(plt.NullLocator())
             ax.yaxis.set_major_locator(plt.NullLocator())
-        plt.savefig('plot_gene_expression_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_gene_expression_'+ str(time()) +'.pdf')
         return fig, axes
 
 class Wishbone:
@@ -1122,7 +1125,7 @@ class Wishbone:
             ax.yaxis.set_major_locator(plt.NullLocator())
             plt.title('Branch associations')
         
-        plt.savefig('plot_wishbone_on_tsne_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_wishbone_on_tsne_'+ str(time()) +'.pdf')
         return fig, ax        
 
 
@@ -1368,7 +1371,7 @@ class Wishbone:
         plt.ylim([-0.2, 1.1 ])
         plt.xlabel('Wishbone trajectory')
         plt.ylabel('Normalized expression')
-        plt.savefig('plot_marker_trajectory_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_marker_trajectory_'+ str(time()) +'.pdf')
         return ret_values, fig, ax
 
 
@@ -1436,7 +1439,7 @@ class Wishbone:
             # Labels
             plt.xlabel( 'Wishbone trajectory' )
 
-        plt.savefig('plot_marker_heatmap_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_marker_heatmap_'+ str(time()) +'.pdf')
         return fig, ax
 
 
@@ -1523,7 +1526,7 @@ class Wishbone:
 
             # Labels
             plt.xlabel( 'Wishbone trajectory' )
-        plt.savefig('plot_derivatives_'+ str(time()) +'.pdf')
+        plt.savefig(analysis_path+ '/plot_derivatives_'+ str(time()) +'.pdf')
         return fig, ax
 
 
