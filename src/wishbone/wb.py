@@ -419,7 +419,7 @@ class SCData:
         if data.shape[0] < 100 and perplexity > perplexity_limit:
             print('Reducing perplexity to %d since there are <100 cells in the dataset. ' % perplexity_limit)
             perplexity = perplexity_limit
-        tsne = manifold.TSNE(n_components=2, perplexity= perplexity, random_state=0, n_iter=2000, verbo
+        tsne = manifold.TSNE(n_components=2, perplexity= perplexity, random_state=0, n_iter=2000, verbose=1)
         X_tsne = tsne.fit_transform(data)
         self.tsne = pd.DataFrame(X_tsne,
                                  index=self.data.index, columns=['x', 'y'])
