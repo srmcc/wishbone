@@ -820,12 +820,12 @@ class SCData:
 
         # Construct the GSEA call
         cmd = shlex.split(
-            'java -cp {user}/.wishbone/tools/gsea2-2.2.1.jar -Xmx1g '
+            'java -cp {tools_path}/gsea2-2.2.1.jar -Xmx1g '
             'xtools.gsea.GseaPreranked -collapse false -mode Max_probe -norm meandiv '
             '-nperm 1000 -include_only_symbols true -make_sets true -plot_top_x 0 '
             '-set_max 500 -set_min 50 -zip_report false -gui false -rnk {rnk} '
             '-rpt_label {out_prefix}_{component} -out {out_dir}/ -gmx {gmt_file}'
-            ''.format(user=os.path.expanduser('~'), rnk=genes_file,
+            ''.format(tools_path=tools_path, rnk=genes_file,
                       out_prefix=out_prefix, component=c, out_dir=out_dir,
                       gmt_file=gmt_file))
 
@@ -876,7 +876,7 @@ class SCData:
         else:
             if not len(gmt_file) == 2:
                 raise ValueError('gmt_file should be a tuple of (organism, filename).')
-            gmt_file = os.path.expanduser('~/.seqc/tools/{}/{}').format(*gmt_file)
+            gmt_file = (tools_path + '/{}/{}').format(*gmt_file)
 
         if components is None:
             components = self.diffusion_map_correlations.columns
