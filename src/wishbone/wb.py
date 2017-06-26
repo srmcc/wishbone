@@ -45,6 +45,8 @@ with warnings.catch_warnings():
 cmap = matplotlib.cm.Spectral_r
 size = 8
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 
 def qualitative_colors(n):
     """ Generalte list of colors
