@@ -46,7 +46,8 @@ cmap = matplotlib.cm.Spectral_r
 size = 8
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-
+wishbone_path=dir_path[:-13]
+tools_path=wishbone_path +'/tools'
 
 def qualitative_colors(n):
     """ Generalte list of colors
@@ -794,8 +795,8 @@ class SCData:
 
     @staticmethod
     def _gmt_options():
-        mouse_options = os.listdir(os.path.expanduser('~/.seqc/tools/mouse'))
-        human_options = os.listdir(os.path.expanduser('~/.seqc/tools/human'))
+        mouse_options = os.listdir(tools_path + '/mouse')
+        human_options = os.listdir(tools_path + '/human')
         print('Available GSEA .gmt files:\n\nmouse:\n{m}\n\nhuman:\n{h}\n'.format(
                 m='\n'.join(mouse_options),
                 h='\n'.join(human_options)))
