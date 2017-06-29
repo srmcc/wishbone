@@ -827,7 +827,7 @@ class SCData:
             'xtools.gsea.GseaPreranked -collapse false -mode Max_probe -norm meandiv '
             '-nperm 1000 -include_only_symbols true -make_sets true -plot_top_x 0 '
             '-set_max 500 -set_min 50 -zip_report false -gui false -rnk {rnk} '
-            '-rpt_label {out_prefix}_{component} -out {out_dir}/ -gmx {gmt_file}'
+            '-rpt_label {out_prefix}_{component} -out {out_dir}/ -gmx {gmt_file} -rnd_seed 149'
             ''.format(tools_path=tools_path, rnk=genes_file,
                       out_prefix=out_prefix, component=c, out_dir=out_dir,
                       gmt_file=gmt_file))
